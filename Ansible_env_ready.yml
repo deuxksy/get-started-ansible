@@ -1,0 +1,41 @@
+---
+- name: setup for the ansible's enviroment
+  host: localhost
+  gather_facts: no 
+
+  taks:
+    - name: install vim-enhanced
+      apt: 
+        name: vim-enhanced
+        state: present
+
+    - name: install git
+      apt: 
+        name: git
+        state: present
+
+    - name: download
+      shell: "curl -fLo /home/vagrant/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
+
+    - nanme: git clone vim-ansible-yaml
+      git:
+        repo: "https://github.com/chase/vim-ansible-yaml.git"
+        dest: /home/vagrant/.vim/bundle/vim-ansible-yaml
+
+    - name: config vimrc
+      lineinfile:
+        dest: /home/vagrant/.vimrc
+        line: "{{ item }}"
+      with_items:
+        - "set number"
+        - "execute pathogen#infect()"
+        - "syntax on"
+
+    - name: config bashrc
+      lineinfile:
+        dest: /home/vagrant/.bashrc
+        line: " {{ item }}"
+      with_items:
+        - "alias vi='vim'"
+        - "alias ans='ansible'"
+        - "alias anp='ansible-playbook'"
