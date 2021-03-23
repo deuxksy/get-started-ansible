@@ -1,6 +1,6 @@
 ---
 - name: setup for the ansible's enviroment
-  host: localhost
+  hosts: localhost
   gather_facts: no 
 
   taks:
