@@ -15,7 +15,7 @@ Vagrant.configure(Vagrant_API_Version) do |config|
     end
     cfg.vm.host_name="ansible-node01"
     cfg.vm.synced_folder ".", "/vagrant", disabled: true
-    # cfg.vm.network "public_network", ip: "192.168.2.221"
+    cfg.vm.network "public_network", ip: "192.168.2.221"
     cfg.vm.network "forwarded_port", guest: 22, host: 19221, auto_correct: false, id: "ssh"
   end
 
@@ -29,7 +29,7 @@ Vagrant.configure(Vagrant_API_Version) do |config|
     end
     cfg.vm.host_name="ansible-node02"
     cfg.vm.synced_folder ".", "/vagrant", disabled: true
-    # cfg.vm.network "public_network", ip: "192.168.2.222"
+    cfg.vm.network "public_network", ip: "192.168.2.222"
     cfg.vm.network "forwarded_port", guest: 22, host: 19222, auto_correct: false, id: "ssh"
   end
 
@@ -41,7 +41,7 @@ Vagrant.configure(Vagrant_API_Version) do |config|
     end
     cfg.vm.host_name="ansible-server"
     cfg.vm.synced_folder ".", "/vagrant", disabled: true
-    # cfg.vm.network "public_network", ip: "192.168.2.220"
+    cfg.vm.network "public_network", ip: "192.168.2.220"
     cfg.vm.network "forwarded_port", guest: 22, host: 19220, auto_correct: false, id: "ssh"
     cfg.vm.provision "shell", path: "bootstrap.sh" #path 파일 전송 및 실행
     cfg.vm.provision "file", source: "Ansible_env_ready.yml", destination: "Ansible_env_ready.yml"
