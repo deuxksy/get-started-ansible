@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: no
 
-  task: 
+  tasks:
     - name: add "/etc/hosts"
       blockinfile: |
         dest=/etc/hosts
@@ -25,10 +25,9 @@
         name: sshpass
         state: present
 
-  taks:
     - name: install vim-enhanced
       apt: 
-        name: vim-enhanced
+        name: vim
         state: present
 
     - name: install git
@@ -39,7 +38,7 @@
     - name: download
       shell: "curl -fLo /home/vagrant/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
 
-    - nanme: git clone vim-ansible-yaml
+    - name: git clone vim-ansible-yaml
       git:
         repo: "https://github.com/chase/vim-ansible-yaml.git"
         dest: /home/vagrant/.vim/bundle/vim-ansible-yaml
