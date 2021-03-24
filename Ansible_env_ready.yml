@@ -1,7 +1,29 @@
 ---
 - name: setup for the ansible's enviroment
   hosts: localhost
-  gather_facts: no 
+  gather_facts: no
+
+  task: 
+    - name: add "/etc/hosts"
+      blockinfile: |
+        dest=/etc/hosts
+        content="
+        192.168.2.220 server
+        192.168.2.221 node01
+        192.168.2.222 node02"
+
+    - name: add "/etc/ansible/hosts"
+      blockinfile: |
+        dest=/etc/ansible/hosts
+        content="
+        [ubuntu]
+        node01
+        node02"
+
+    - name: install sshpass for authentication
+      apt:
+        name: sshpass
+        state: present
 
   taks:
     - name: install vim-enhanced
